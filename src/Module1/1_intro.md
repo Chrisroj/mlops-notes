@@ -18,5 +18,3 @@ MLOps is helpful in all 3 stages.
 
 ![mlops](../Images/Module1/mlops_process.jpg)
 
-CRJ
-
