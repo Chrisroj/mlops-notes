@@ -8,4 +8,4 @@ title = "test-book"
 
 [output.html]
 default-theme = "rust"
-preferred-dark-theme = "navy"
+preferred-dark-theme = "rust"

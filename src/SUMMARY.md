@@ -13,6 +13,7 @@
   - [Autologging](./Module2/5_autologging.md)
   - [Log Models](./Module2/6_log_models.md)
   - [Model Registry](./Module2/7_model_registry.md)
+  - [MLflow: Benefits, Limitations and Alternatives](./Module2/8_mlflow_benefits.md)
 
 - [Appendix A: VM Instance in GCP](./Appendixes/A_gcp.md)
 - [Appendix B: Conda Environments](./Appendixes/B_conda.md)
