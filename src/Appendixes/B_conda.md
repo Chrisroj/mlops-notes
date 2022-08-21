@@ -85,3 +85,17 @@ conda info --envs
 ```bash
 conda install --file requirements.txt
 ```
+
+**Create `environment.yml` file via conda**
+
+Inside your conda environment type:
+```bash
+ conda env export > environment.yml
+```
+
+**Create an environment from the `environment.yml` file**
+
+```bash
+conda env create -f environment.yml
+
+```
