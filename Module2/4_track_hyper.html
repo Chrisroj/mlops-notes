@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Tracking a Multiples Experiments - test-book</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "rust" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../Module1/1_intro.html"><strong aria-hidden="true">1.</strong> Introduction to MLOps</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Module1/2_aws.html"><strong aria-hidden="true">1.1.</strong> VM Instance in AWS</a></li><li class="chapter-item expanded "><a href="../Module1/3_dependencies.html"><strong aria-hidden="true">1.2.</strong> Install Dependencies</a></li><li class="chapter-item expanded "><a href="../Module1/4_overview.html"><strong aria-hidden="true">1.3.</strong> Course Overview</a></li><li class="chapter-item expanded "><a href="../Module1/5_maturity.html"><strong aria-hidden="true">1.4.</strong> MLOps Maturity Model</a></li></ol></li><li class="chapter-item expanded "><a href="../Module2/1_intro_exptracking.html"><strong aria-hidden="true">2.</strong> Introduction to Experiment tracking</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Module2/2_start_mlflow.html"><strong aria-hidden="true">2.1.</strong> Getting Started with MLflow</a></li><li class="chapter-item expanded "><a href="../Module2/3_track_single.html"><strong aria-hidden="true">2.2.</strong> Tracking a Single Experiment</a></li><li class="chapter-item expanded "><a href="../Module2/4_track_hyper.html" class="active"><strong aria-hidden="true">2.3.</strong> Tracking a Multiples Experiments</a></li><li class="chapter-item expanded "><a href="../Module2/5_autologging.html"><strong aria-hidden="true">2.4.</strong> Autologging</a></li><li class="chapter-item expanded "><a href="../Module2/6_log_models.html"><strong aria-hidden="true">2.5.</strong> Log Models</a></li><li class="chapter-item expanded "><a href="../Module2/7_model_registry.html"><strong aria-hidden="true">2.6.</strong> Model Registry</a></li><li class="chapter-item expanded "><a href="../Module2/8_mlflow_benefits.html"><strong aria-hidden="true">2.7.</strong> MLflow: Benefits, Limitations and Alternatives</a></li></ol></li><li class="chapter-item expanded "><a href="../Appendixes/A_gcp.html"><strong aria-hidden="true">3.</strong> Appendix A: VM Instance in GCP</a></li><li class="chapter-item expanded "><a href="../Appendixes/B_conda.html"><strong aria-hidden="true">4.</strong> Appendix B: Conda Environments</a></li><li class="chapter-item expanded "><a href="../Appendixes/C_mlflow_aws.html"><strong aria-hidden="true">5.</strong> Appendix C: MLflow on AWS</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">test-book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="tracking-a-multiple-experiment-runshyperparameter-optimization"><a class="header" href="#tracking-a-multiple-experiment-runshyperparameter-optimization">Tracking a Multiple Experiment runs(Hyperparameter Optimization)</a></h1>
+<p>If you want to track Hyperparameter Optimization you can do a for loop with <code>with mlflow.start_run():</code> inside and try a different hyperparameters in each iteration, but this is not a efficient way, then we are going to use <code>hyperopt</code> this python library use bayesian methods to find the best hyperparameters in a efficient way. If you want to know more about hyperopt you can chek de <a href="http://hyperopt.github.io/hyperopt/">Hyperopt Documentation</a>. We import some classes from <code>hyperopt</code>:</p>
+<ul>
+<li><code>fmin</code>: Try to minimize and output(a metric)</li>
+<li><code>tpe</code>: Algorithm to control the logic of the optimization</li>
+<li><code>hp</code>: Include different methods to define the search space</li>
+<li><code>STATUS_OK</code>: Signal to tell hyperopt the objetive function has run successfully</li>
+<li><code>Trials</code>: Keep track information of each run</li>
+<li><code>scope</code>: Define a range of type integer</li>
+</ul>
+<p>And now by wrapping the hyperopt Optimization objective inside a with <code>with mlflow.start_run()</code> block, we can track every optimization run that was ran by hyperopt. We then log the parameters passed by hyperopt as well as the metric as follows:</p>
+<pre><code class="language-python">
+import xgboost as xgb
+
+from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
+from hyperopt.pyll import scope
+
+train = xgb.DMatrix(X_train, label=y_train)
+valid = xgb.DMatrix(X_val, label=y_val)
+
+def objective(params):
+    with mlflow.start_run():
+        mlflow.set_tag(&quot;model&quot;, &quot;xgboost&quot;)
+        mlflow.log_params(params)
+        booster = xgb.train(
+            params=params,
+            dtrain=train,
+            num_boost_round=1000,
+            evals=[(valid, 'validation')],
+            early_stopping_rounds=50
+        )
+        y_pred = booster.predict(valid)
+        rmse = mean_squared_error(y_val, y_pred, squared=False)
+        mlflow.log_metric(&quot;rmse&quot;, rmse)
+
+    return {'loss': rmse, 'status': STATUS_OK}
+
+search_space = {
+    'max_depth': scope.int(hp.quniform('max_depth', 4, 100, 1)),
+    'learning_rate': hp.loguniform('learning_rate', -3, 0),
+    'reg_alpha': hp.loguniform('reg_alpha', -5, -1),
+    'reg_lambda': hp.loguniform('reg_lambda', -6, -1),
+    'min_child_weight': hp.loguniform('min_child_weight', -1, 3),
+    'objective': 'reg:linear',
+    'seed': 42
+}
+
+best_result = fmin(
+    fn=objective,
+    space=search_space,
+    algo=tpe.suggest,
+    max_evals=50,
+    trials=Trials()
+)
+
+</code></pre>
+<p>In this block, we defined the search space and the objective than ran the optimizer. We wrap the training and validation block inside <code>with mlflow.start_run()</code> and log the used parameters using <code>log_params</code> and validation RMSE using <code>log_metric</code>.</p>
+<p>In the UI will be the runs generated by hyperopt, since we use the tag <code>mlflow.set_tag(&quot;model&quot;, &quot;xgboost&quot;)</code> you can filter the runs typingin the search section(in the UI):</p>
+<pre><code class="language-bash">tags.model = &quot;xgboost&quot;
+</code></pre>
+<p>In the UI you can compare all this runs following <strong>Filter xboost models -&gt; Select all of them -&gt; CLick in Compare</strong> and you will can visualize a Parallel Coordinates Plot, Scatter Plot and Contour Plot.</p>
+<p><img src="../Images/Module2/mlflow_viz.PNG" alt="conda_logo" /></p>
+<p>If you want to know how to read this kind of visualizations you can check this <a href="https://youtu.be/iaJz-T7VWec?list=PL3MmuxUbc_hIUISrluw_A7wDSmfOhErJK&amp;t=684">video</a></p>
+<h2 id="selecting-the-best-model"><a class="header" href="#selecting-the-best-model">Selecting the Best Model</a></h2>
+<p>When you select the best model is importan to check not just the performance, is important to check:</p>
+<ul>
+<li><strong>Performance</strong></li>
+<li><strong>Training time</strong></li>
+<li><strong>Model Size(Complexity)</strong></li>
+</ul>
+<p>Could be that a model has the best performance but the training time and the model size are very bigger than the other model, in that case could be better to choose a model with lower performance but a lower training time and model size.</p>
+<p>Onece you have select the best model you have to run again the model with the best parameters, you can use autologging to avoid write the mlflow logs.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Module2/3_track_single.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../Module2/5_autologging.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Module2/3_track_single.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../Module2/5_autologging.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

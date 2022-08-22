@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>VM Instance in AWS - test-book</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "rust" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../Module1/1_intro.html"><strong aria-hidden="true">1.</strong> Introduction to MLOps</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Module1/2_aws.html" class="active"><strong aria-hidden="true">1.1.</strong> VM Instance in AWS</a></li><li class="chapter-item expanded "><a href="../Module1/3_dependencies.html"><strong aria-hidden="true">1.2.</strong> Install Dependencies</a></li><li class="chapter-item expanded "><a href="../Module1/4_overview.html"><strong aria-hidden="true">1.3.</strong> Course Overview</a></li><li class="chapter-item expanded "><a href="../Module1/5_maturity.html"><strong aria-hidden="true">1.4.</strong> MLOps Maturity Model</a></li></ol></li><li class="chapter-item expanded "><a href="../Module2/1_intro_exptracking.html"><strong aria-hidden="true">2.</strong> Introduction to Experiment tracking</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Module2/2_start_mlflow.html"><strong aria-hidden="true">2.1.</strong> Getting Started with MLflow</a></li><li class="chapter-item expanded "><a href="../Module2/3_track_single.html"><strong aria-hidden="true">2.2.</strong> Tracking a Single Experiment</a></li><li class="chapter-item expanded "><a href="../Module2/4_track_hyper.html"><strong aria-hidden="true">2.3.</strong> Tracking a Multiples Experiments</a></li><li class="chapter-item expanded "><a href="../Module2/5_autologging.html"><strong aria-hidden="true">2.4.</strong> Autologging</a></li><li class="chapter-item expanded "><a href="../Module2/6_log_models.html"><strong aria-hidden="true">2.5.</strong> Log Models</a></li><li class="chapter-item expanded "><a href="../Module2/7_model_registry.html"><strong aria-hidden="true">2.6.</strong> Model Registry</a></li><li class="chapter-item expanded "><a href="../Module2/8_mlflow_benefits.html"><strong aria-hidden="true">2.7.</strong> MLflow: Benefits, Limitations and Alternatives</a></li></ol></li><li class="chapter-item expanded "><a href="../Appendixes/A_gcp.html"><strong aria-hidden="true">3.</strong> Appendix A: VM Instance in GCP</a></li><li class="chapter-item expanded "><a href="../Appendixes/B_conda.html"><strong aria-hidden="true">4.</strong> Appendix B: Conda Environments</a></li><li class="chapter-item expanded "><a href="../Appendixes/C_mlflow_aws.html"><strong aria-hidden="true">5.</strong> Appendix C: MLflow on AWS</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">test-book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="vm-instance-in-aws"><a class="header" href="#vm-instance-in-aws">VM Instance in AWS</a></h1>
+<p>Before to start working with MLOps you should use a VM instance to work with and setup the environment to work.</p>
+<p>You can prepare your environment in your local machine, but in our case we are going to set up a VM instance in AWS. You need to have an AWS account(if you want to do the same in GCP go to <a href="../Appendixes/A_gcp.html">VM Instance in GCP</a>)</p>
+<ol>
+<li>
+<p><strong>Create EC2 instance:</strong></p>
+<p>Go to EC2 service and click in launch instance(orange button), now config the VM as:</p>
+<ul>
+<li>Name: <code>mlops-zoomcamp</code></li>
+<li>Amazon Machine Image: <code>Ubuntu Server 22.04 LTS (HVM), SSD Volume Type</code></li>
+<li>Architecture: <code>64-bit (x86)</code></li>
+<li>Instance type: <code>t2.large</code></li>
+<li>Create and select a key pair:
+<ul>
+<li>Key pair name: <code>asus-laptop</code></li>
+<li>Key pair type: <code>RSA</code></li>
+<li>Private key file format: <code>.pem</code></li>
+</ul>
+</li>
+<li>Configure Storage: <code>1x 30 Gib gp2 Root Volume</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Copy and paste <code>.pem</code> file:</strong> </p>
+<p>When you create a key pair a <code>.pem</code> will downloaded automatically, you will have to copy and paste this file to your  <code>~/.ssh</code> directory in your local machine.</p>
+</li>
+<li>
+<p><strong>Connect to VM Instance:</strong> </p>
+<p>Go to <code>~./.ssh</code> directory and locate the <code>config</code> file type nano <code>~/.ssh/config</code> copy and paste:</p>
+<pre><code class="language-bash">Host mlops-zoomcamp
+    HostName EXTERNAL_IP
+    User USER
+    IdentityFile KEY_FILENAME_DIRECTORY
+    LocalForward PORT_1 IP:PORT_1
+    LocalForward PORT_2 IP:PORT_2
+    LocalForward PORT_3 IP:PORT_3
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-bash">Host mlops-zoomcamp
+    HostName 18.117.147.165
+    User ubuntu
+    IdentityFile C:\Users\ferro\.ssh\asus-laptop.pem
+    LocalForward 8888 localhost:8888
+    LocalForward 5000 127.0.0.1:5000
+    LocalForward 4200 0.0.0.0:4200
+</code></pre>
+</li>
+</ol>
+<p>The EXTERNAL_IP can change every time you power one the VM. 
+Now you can type <code>ssh mlops-zoomcamp</code> in your console and you'll get connected to the VM.</p>
+<p><strong>Note0</strong>: In step 4 in <code>config</code> file the last two lines are to forward multiple port through the same host, in this case 
+<code>LocalForward 8888 localhost:8888</code> is for jupyter, <code>LocalForward 5000 127.0.0.1:5000</code> is for MLflow and <code>LocalForward 4200 0.0.0.0:4200</code> is for Prefect. You can add more LocalForward if you want.</p>
+<p><strong>Note1</strong>: Don't forget to power off the VM after your work you can use <code>sudo poweroff</code>. </p>
+<p><strong>Note2</strong>: if you get the next warning:</p>
+<pre><code class="language-bash">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+</code></pre>
+<p>Then copy and paste the EXTERNAL_IP of your VM and type:</p>
+<pre><code class="language-bash">ssh-keygen -R EXTERNAL_IP
+</code></pre>
+<p>Example:</p>
+<pre><code class="language-bash">ssh-keygen -R &quot;34.125.105.3&quot;
+</code></pre>
+<p><a href="#">Back to the top</a></p>
+<h3 id="vs-code-setup"><a class="header" href="#vs-code-setup">VS Code Setup <a name="vscode"></a></a></h3>
+<p>If you want to use the VM with a local VS code, follow:</p>
+<ol>
+<li>Install &quot;Remote - SSH&quot; extension in VS Code</li>
+<li>Click on &quot;Open a Remote Window&quot; icon on bottom-left corner</li>
+<li>From dropdown select &quot;Connect to Host&quot; and then select the host name that you put in the <code>config</code> file, in this case <code>mlops-zoomcamp</code>. That opens a new VSCode window.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Module1/1_intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../Module1/3_dependencies.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Module1/1_intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../Module1/3_dependencies.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
