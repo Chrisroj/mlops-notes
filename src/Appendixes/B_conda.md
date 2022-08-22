@@ -19,6 +19,21 @@ To install conda select the steps for your OS:
 
 **Note:** You have to choose between install Miniconda or Anaconda. Miniconda is a free minimal installer for conda. It is a small, bootstrap version of Anaconda that includes only conda, Python, the packages they depend on, and a small number of other useful packages, including pip, zlib and a few others. **I prefer Miniconda than Anaconda**.
 
+## Installing Miniconda from Terminal in Linux
+
+Installing miniconda on Linux can be a bit tricky the first time you do it completely from the terminal. The following snippet will create a directory to install miniconda into, download the latest python 3 based install script for Linux 64 bit, run the install script, delete the install script, then add a conda initialize to your bash or zsh shell. After doing this you can restart your shell and conda will be ready to go.
+
+```bash
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm -rf ~/miniconda3/miniconda.sh
+~/miniconda3/bin/conda init bash
+~/miniconda3/bin/conda init zsh
+
+```
+If you want to know how to do the same in macOS go to [install_miniconda_from_the_command_line](https://engineeringfordatascience.com/posts/install_miniconda_from_the_command_line/)
+
 ## Create an Environment
 
 It's recommended to not install packages in `base`environment of `conda`, to create an independent environment type:
