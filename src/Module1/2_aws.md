@@ -15,7 +15,7 @@ You can prepare your environment in your local machine, but in our case we are g
         - Key pair name: `asus-laptop`
         - Key pair type: `RSA`
         - Private key file format: `.pem`
-    - Configure Storage: `1x 30 Gib gp2 Root Volume`.HOLI
+    - Configure Storage: `1x 30 Gib gp2 Root Volume`.
         
 
 
